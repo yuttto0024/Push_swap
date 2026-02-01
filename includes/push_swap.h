@@ -8,23 +8,22 @@
 # include "libft.h"
 # include "ft_printf.h"
 
-// Ring Buffer
-typedef struct s_ring
+// array
+typedef struct s_array
 {
 	int	*data;
 	int	top;
-	int	bottom;
 	int	size;
-	int	count;
-}				t_ring;
+	int	length;
+}				t_array;
 
 // Linked List
 typedef struct s_node
 {
 	int				value;
-	int				index;
+	int				rank;
+	struct s_node	*pre;
 	struct s_node	*next;
-	struct s_node	*prev;
 }				t_node;
 
 typedef struct	s_stack
@@ -33,5 +32,7 @@ typedef struct	s_stack
 	t_node	*bottom;
 	int		size;
 }				t_stack;
+
+t_node	*new_node(int content);
 
 #endif
