@@ -95,6 +95,35 @@ ra (Rotate A) や rra (Reverse Rotate A) 等の命令は、スタックのbottom
 
 ---
 
+### 環境構築と実装方針 (Phase 1)
+1. ディレクトリ構成
+
+保守性と再利用性を高めるため、外部ライブラリを独立したディレクトリとして配置し、再帰的なビルド環境を構築した。
+Plaintext
+
+push_swap/
+├── Makefile            # ルートMakefile（各ライブラリの呼び出しとリンク）
+├── includes/           # プロジェクト共通ヘッダー
+├── srcs/               # ソースコード
+├── libft/              # Libftライブラリ（.git削除済み）
+└── ft_printf/          # ft_printfライブラリ（.git削除済み）
+
+2. Makefile設計
+
+    再リンク防止 (Relink protection): ソース変更がない場合はコンパイルを行わない設計。
+
+    ライブラリ統合: libft および ft_printf をサブディレクトリのMakefileに委譲 (make -C) し、生成された .a ファイルをリンク (-L -l) する構成を採用。
+
+3. データ構造の定義 (push_swap.h)
+
+比較実装を行うため、以下の2つの構造体を定義済み。
+
+    t_ring: 循環バッファ用の構造体（データ配列、top/bottomインデックス、サイズ管理）。
+
+    t_stack (t_node): 双方向リスト用の構造体（値、next/prevポインタ）。
+
+---
+
 ### ソートの選択  
 ソートの基本形は、主に「交換法」「選択法」「挿入法」の3つ
 
@@ -105,7 +134,7 @@ ra (Rotate A) や rra (Reverse Rotate A) 等の命令は、スタックのbottom
 
 ## 参考文献
 - [うさぎでもわかるスタックとキュー](https://www.momoyama-usagi.com/entry/info-algo-stack-queue)
-
+- [双方向連結リストとは](https://ufcpp.net/study/algorithm/col_blist.html)
 &nbsp;  
 &nbsp;  
 
@@ -125,6 +154,7 @@ ra (Rotate A) や rra (Reverse Rotate A) 等の命令は、スタックのbottom
 
 # 作業用メモ
 - 参考記事：[うさぎでもわかるスタックとキュー（配列を使ったデータ構造）](https://www.momoyama-usagi.com/entry/info-algo-stack-queue)
+- 
 	- スタック  
 		- ルール  
 	  		LIFO (Last In, First Out) - 後に入れたものが先に出る。
