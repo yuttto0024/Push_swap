@@ -16,7 +16,7 @@ LFLAGS		= -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lftprintf
 
 SRCS_NAME   = main.c \
               stack/list/new_node.c \
-
+              stack/list/add_node_back.c \
 
 SRCS		= $(addprefix $(SRCDIR)/, $(SRCS_NAME))
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS_NAME:.c=.o))
