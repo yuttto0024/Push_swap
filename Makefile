@@ -18,6 +18,7 @@ SRCS_NAME   = main.c \
               stack/list/make_node.c \
               stack/list/add_node_back.c \
 			  stack/list/init_stack.c \
+			  stack/list/clean_stack.c \
 
 SRCS		= $(addprefix $(SRCDIR)/, $(SRCS_NAME))
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS_NAME:.c=.o))
