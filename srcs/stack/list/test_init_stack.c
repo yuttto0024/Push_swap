@@ -35,6 +35,7 @@ int	main(int argc, char **argv)
 	init_stack_a(&stack, args);
 	debug_print_stack(&stack);
 	if (argc == 2)
-		free(args);
+		free_strs(args);
+	free_stack(&stack);
 	return (0);
 }
