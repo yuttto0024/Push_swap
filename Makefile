@@ -15,8 +15,9 @@ IFLAGS		= -I $(INCDIR) -I $(LIBFT_DIR) -I $(PRINTF_DIR)/includes
 LFLAGS		= -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lftprintf
 
 SRCS_NAME   = main.c \
-              stack/list/new_node.c \
+              stack/list/make_node.c \
               stack/list/add_node_back.c \
+			  stack/list/init_stack.c \
 
 SRCS		= $(addprefix $(SRCDIR)/, $(SRCS_NAME))
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS_NAME:.c=.o))

@@ -16,7 +16,7 @@ typedef struct s_stack
 	int	 size;
 }			   t_stack;
 
-t_node  *new_node(int content)
+t_node  *make_node(int content)
 {
 	t_node  *node;
 
@@ -92,13 +92,13 @@ int main(void)
 	stack.bottom = NULL;
 	stack.size = 0;
 
-	add_node_back(&stack, new_node(10));
+	add_node_back(&stack, make_node_node(10));
 	printf("Size: %d (Top: %d, Bottom: %d)\n", stack.size, stack.top->value, stack.bottom->value);
 
-	add_node_back(&stack, new_node(20));
+	add_node_back(&stack, make_node(20));
 	printf("Size: %d (Top: %d, Bottom: %d)\n", stack.size, stack.top->value, stack.bottom->value);
 
-	add_node_back(&stack, new_node(30));
+	add_node_back(&stack, make_node(30));
 	printf("Size: %d (Top: %d, Bottom: %d)\n", stack.size, stack.top->value, stack.bottom->value);
 
 	printf("\n");

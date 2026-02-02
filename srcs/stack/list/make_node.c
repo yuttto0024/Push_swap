@@ -12,7 +12,7 @@ typedef struct s_node
 }				t_node;
 */
 
-t_node	*new_node(int content)
+t_node	*make_node(int content)
 {
 	t_node	*new_node;
 
@@ -31,7 +31,7 @@ int	main(void)
 {
 	t_node	*node;
 
-	node = new_node(42);
+	node = make_node(42);
 	if (!node)
 		return (1);
 	printf("Value: %d\n", node->value);
