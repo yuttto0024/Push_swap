@@ -53,13 +53,6 @@ static int	is_int_range(char *str)
 	return (check_limit(&str[i], sign));
 }
 
-void	free_error_stack(t_stack *stack)
-{
-	(void)stack;
-	ft_printf("Error\n");
-	exit(1);
-}
-
 int	has_duplicate(t_stack *stack, int n)
 {
 	t_node	*current;
@@ -76,7 +69,7 @@ int	has_duplicate(t_stack *stack, int n)
 	return (0);
 }
 
-void	init_stack_a(t_stack *stack, char **argv)
+void	init_stack_a(t_stack *stack, char **argv, int argc)
 {
 	long	n;
 	int		i;
@@ -85,12 +78,12 @@ void	init_stack_a(t_stack *stack, char **argv)
 	while (argv[i])
 	{
 		if (!is_numeric(argv[i]))
-			free_error_stack(stack);
+			error_exit(stack, argv, argc);
 		if (!is_int_range(argv[i]))
-			free_error_stack(stack);
+			error_exit(stack, argv, argc);
 		n = ft_atoi(argv[i]);
 		if (has_duplicate(stack, (int)n))
-			free_error_stack(stack);
+			error_exit(stack, argv, argc);
 		add_node_back(stack, make_node((int)n));
 		i++;
 	}
