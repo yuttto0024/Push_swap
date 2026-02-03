@@ -4,17 +4,17 @@ void	rotate(t_stack *stack)
 {
 	t_node	*first;
 	t_node	*second;
-	t_node	*end;
+	t_node	*last;
 	
-	if (stack->size <= 1)
+	if (stack->size < 2)
 		return ;
 	first = stack->top;
 	second = first->next;
-	end = stack->bottom;
+	last = stack->bottom;
 	stack->top = second;
 	second->pre = NULL;
 	stack->bottom = first;
-	end->next = first;
-	first->pre = end;
+	last->next = first;
+	first->pre = last;
 	first->next = NULL;
 }
