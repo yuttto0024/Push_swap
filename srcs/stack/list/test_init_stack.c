@@ -29,13 +29,19 @@ int	main(int argc, char **argv)
 	stack.size = 0;
 
 	if (argc == 2)
+	{
 		args = ft_split(argv[1], ' ');
-	else
-		args = &argv[1];
-	init_stack_a(&stack, args);
-	debug_print_stack(&stack);
-	if (argc == 2)
+		if (!args)
+			return (1);
+		init_stack_a(&stack, args, argc);
+		debug_print_stack(&stack);
 		free_strs(args);
+	}
+	else
+	{
+		init_stack_a(&stack, &argv[1], argc);
+		debug_print_stack(&stack);
+	}
 	free_stack(&stack);
 	return (0);
 }

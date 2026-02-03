@@ -73,18 +73,20 @@ void	init_stack_a(t_stack *stack, char **argv, int argc)
 {
 	long	n;
 	int		i;
+	t_node	*new;
 
 	i = 0;
 	while (argv[i])
 	{
-		if (!is_numeric(argv[i]))
-			error_exit(stack, argv, argc);
-		if (!is_int_range(argv[i]))
+		if (!is_numeric(argv[i]) || !is_int_range(argv[i]))
 			error_exit(stack, argv, argc);
 		n = ft_atoi(argv[i]);
 		if (has_duplicate(stack, (int)n))
 			error_exit(stack, argv, argc);
-		add_node_back(stack, make_node((int)n));
+		new = make_node((int)n);
+		if (!new)
+			error_exit(stack, argv, argc);
+		add_node_back(stack, new);
 		i++;
 	}
 }

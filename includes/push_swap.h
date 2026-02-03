@@ -35,7 +35,7 @@ typedef struct	s_stack
 
 t_node	*make_node(int content);
 void	add_node_back(t_stack *stack, t_node *new_node);
-void	init_stack_a(t_stack *stack, char **argv);
+void	init_stack_a(t_stack *stack, char **argv, int argc);
 void	free_strs(char **strs);
 void	free_stack(t_stack *stack);
 void	error_exit(t_stack *stack, char **strs, int argc);
