@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int	get_asc_length(t_stack *stack)
+int	get_asc_len(t_stack *stack)
 {
 	t_node	*current;
 	int		len;
@@ -22,7 +22,7 @@ int	get_asc_length(t_stack *stack)
 	return (len);
 }
 
-int	get_desc_length(t_stack *stack)
+int	get_desc_len(t_stack *stack)
 {
 	t_node  *current;
 	int		len;

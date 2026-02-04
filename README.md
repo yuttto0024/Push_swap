@@ -334,34 +334,37 @@ void    process_one_pass(t_stack *stack_a, t_stack *stack_b)
 
 ループの中身を完成させるために、**「山をBに移動させる関数」** が必要です。
 
-以下の関数を `srcs/sort_algorithm/move_run.c`（新規）に実装してみましょう。
+以下の関数を `srcs/sort_algorithm/move_run.c`（新規）に実装してみる。
 
-```c
-/*
- * 目的: スタックAから次のRun（昇順の山）を見つけ、
- * その長さ分だけBにプッシュする。
- * 戻り値: 移動した要素数
- */
-int move_run_to_b(t_stack *stack_a, t_stack *stack_b)
-{
-    int len;
-    int i;
 
-    // 1. これから移動する山の長さを測る
-    len = get_asc_len(stack_a);
+さらに先の工程：ループを作る
 
-    // 2. その長さ分だけ pb する
-    i = 0;
-    while (i < len)
-    {
-        pb(stack_b, stack_a);
-        i++;
-    }
-    
-    return (len);
-}
+これで「1回のマージ（山2つ → 山1つ）」は完成しました。 次は、これを「スタックA全体に対して行うループ」を作ります。
 
-```
+このループが回るたびに、小さな三角形がたくさん合体して、少し大きな三角形になり、Aの底に溜まっていきます。
+次に実装する関数 sort_one_pass
+
+新しいファイル（例: srcs/sort_algorithm/sort_pass.c）に以下のイメージで実装します。
+C
+
+スタックAを一周して、全ての山を2倍のサイズに成長させる」 という、このソートのエンジン部分
+
+Phase 1: 観測 (Eyes) -> get_asc/desc_len
+
+        山の長さを測る機能。完璧です。
+Phase 2: 分配 (Hands) -> move_run_to_b
+
+        Aの「降順」を見つけてBに送り、「昇順」に変換する機能。完璧です。
+
+Phase 3: 合体 (Zipper) -> merge_len_in_a
+
+        AとBの山を噛み合わせてソートする機能。完璧です。
+Phase 4: 周回 (One Pass) -> sort_one_pass
+
+        スタック全体をグルっと一周処理する機能。完璧です。
+
+残るはあと1つ、「脳（Main Loop）」だけです。 「一周回す (sort_one_pass)」を、「完全にソートされるまで繰り返す」という命令を出す親分が必要です。
+
 
 ### 💡 重要なヒント（次の課題）
 
