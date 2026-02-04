@@ -1,18 +1,54 @@
 #include "push_swap.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-int main(void)
+void	debug_print_stack(t_stack *stack)
 {
-    // 1. Libft_test
-    if (ft_strlen("Hello") == 5)
-        ft_printf("Libft is linked\n");
+	t_node *current;
 
-    // 2. ft_printf_test
-    ft_printf("ft_printf is working!\n");
-
-    // 3. stack_test
-    t_stack	stack;
-    stack.size = 0;
-    ft_printf("Stack initialized. Size: %d\n", stack.size);
-
-    return (1);
+	current = stack->top;
+	printf("Size: %d\n", stack->size);
+	printf("Top: %p, Bottom: %p\n", stack->top, stack->bottom);
+	while (current)
+	{	
+		printf("[%d]\n", current->value);
+		current = current->next;
+	}
+	printf("\n");
 }
+
+int	main(int argc, char **argv)
+{
+	t_stack	stack;
+	char	**args;
+
+	if (argc < 2)
+        return (0);
+	stack.top = NULL;
+	stack.bottom = NULL;
+	stack.size = 0;
+
+	if (argc == 2)
+	{
+		args = ft_split(argv[1], ' ');
+		if (!args)
+			return (1);
+		init_stack_a(&stack, args, argc);
+		debug_print_stack(&stack);
+		free_strs(args);
+	}
+	else
+	{
+		init_stack_a(&stack, &argv[1], argc);
+		debug_print_stack(&stack);
+	}
+	if (stack.size == 3)
+ 		sort_three(&stack);
+	else if (stack.size == 2)
+		sort_three(&stack);
+	ft_printf("---after_sort---\n");
+	debug_print_stack(&stack);
+	free_stack(&stack);
+	return (0);
+}
+

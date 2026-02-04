@@ -19,6 +19,15 @@ SRCS_NAME   = main.c \
               stack/list/add_node_back.c \
 			  stack/list/init_stack.c \
 			  stack/list/clean_stack.c \
+			  command/swap.c \
+			  command/swap_command.c \
+			  command/push.c \
+			  command/push_command.c \
+			  command/rotate.c \
+			  command/rotate_command.c \
+			  command/reverse_rotate.c \
+			  command/reverse_rotate_command.c \
+			  sort_algorithm/sort_three.c \
 
 SRCS		= $(addprefix $(SRCDIR)/, $(SRCS_NAME))
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS_NAME:.c=.o))
