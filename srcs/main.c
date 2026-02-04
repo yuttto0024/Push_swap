@@ -21,6 +21,8 @@ int	main(int argc, char **argv)
 {
 	t_stack	stack;
 	char	**args;
+	int		asc;
+	int		desc;
 
 	if (argc < 2)
         return (0);
@@ -42,12 +44,18 @@ int	main(int argc, char **argv)
 		init_stack_a(&stack, &argv[1], argc);
 		debug_print_stack(&stack);
 	}
-	if (stack.size == 3)
- 		sort_three(&stack);
-	else if (stack.size == 2)
-		sort_three(&stack);
-	ft_printf("---after_sort---\n");
+	// if (stack.size == 3)
+ 	// 	sort_three(&stack);
+	// else if (stack.size == 2)
+	// 	sort_three(&stack);
+	// ft_printf("---after_sort---\n");
+	// debug_print_stack(&stack);
+	ft_printf("--- Run Check ---\n");
 	debug_print_stack(&stack);
+	asc = get_asc_length(&stack);
+	desc = get_desc_length(&stack);
+	ft_printf("Ascending Run: %d\n", asc);
+	ft_printf("Descending Run: %d\n", desc);
 	free_stack(&stack);
 	return (0);
 }

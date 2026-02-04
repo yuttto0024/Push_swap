@@ -20,7 +20,6 @@ t_node	*make_node(int content)
 	if (!new_node)
 		return (NULL);
 	new_node->value = content;
-	new_node->rank = -1;
 	new_node->pre = NULL;
 	new_node->next = NULL;
 	return (new_node);
