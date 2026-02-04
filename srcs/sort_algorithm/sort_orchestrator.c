@@ -1,6 +1,6 @@
-#include "push_swap.c"
+#include "push_swap.h"
 
-static int	is_sorted(t_stack *stack_a)
+static int	is_sorted(t_stack *stack)
 {
 	if (get_asc_len(stack) == stack->size)
 		return (1);
@@ -9,8 +9,9 @@ static int	is_sorted(t_stack *stack_a)
 
 void	sort_stacks(t_stack *stack_a, t_stack *stack_b)
 {
-	if (is_sorted(stack_a))
-		return ;
 	while (!is_sorted(stack_a))
+	{
 		sort_one_pass(stack_a, stack_b);
+		fix_rotation(stack_a);
+	}
 }

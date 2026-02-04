@@ -32,6 +32,7 @@ SRCS_NAME   = main.c \
 			  sort_algorithm/merge.c \
 			  sort_algorithm/sort_one_pass.c \
 			  sort_algorithm/sort_orchestrator.c \
+			  sort_algorithm/fix_rotation.c \
 
 SRCS		= $(addprefix $(SRCDIR)/, $(SRCS_NAME))
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS_NAME:.c=.o))
