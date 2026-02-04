@@ -384,7 +384,50 @@ Phase 4: 周回 (One Pass) -> sort_one_pass
 
 
 
+---
 
+### 3. ラストピース：Main Loop の実装
+
+
+**ロジック:**
+
+1. 「今、Aはソート済みか？」をチェック。
+2. ソートされていなければ、`sort_one_pass` を実行。
+3. これを繰り返す。
+
+```c
+#include "push_swap.h"
+
+/*
+ * スタックAが完全にソートされているかチェックする
+ * (get_asc_lenの結果が、スタック全体のサイズと同じならソート完了！)
+ */
+int is_sorted(t_stack *stack)
+{
+    // Aの先頭からの増加列の長さ == 全体のサイズ ならOK
+    if (get_asc_len(stack) == stack->size)
+        return (1);
+    return (0);
+}
+
+/*
+ * ソート実行のメイン関数
+ */
+void    sort_stack(t_stack *stack_a, t_stack *stack_b)
+{
+    // 1. 最初からソートされていたら何もしない
+    if (is_sorted(stack_a))
+        return ;
+
+    // 2. ソートされるまでパスを繰り返す
+    //    1周するごとに、山のサイズが倍々になっていく
+    while (!is_sorted(stack_a))
+    {
+        sort_one_pass(stack_a, stack_b);
+    }
+}
+
+```
 
 
 

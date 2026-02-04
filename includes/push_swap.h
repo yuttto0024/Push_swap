@@ -57,5 +57,7 @@ void	sort_three(t_stack *a);
 int		get_asc_length(t_stack *stack);
 int		get_desc_length(t_stack *stack);
 void	merge_len_in_a(t_stack *stack_a, t_stack *stack_b, int len_a, int len_b);
+void	sort_one_pass(t_stack *stack_a,t_stack *stack_b);
+void	sort_stacks(t_stack *stack_a, t_stack *stack_b);
 
 #endif

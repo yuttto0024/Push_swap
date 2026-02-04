@@ -1,6 +1,21 @@
 #include "push_swap.c"
 
-void	sort_one_pass(t_stack *stack_a. t_stack *stack_b)
+static int	move_run_to_b(t_stack *stack_a, t_stack *stack_b)
+{
+	int	len;
+	int	i;
+
+	len = get_desc_len(stack_a);
+	i = 0;
+	while (i < len)
+	{
+		pb(stack_b, stack_a);
+		i++;
+	}
+	return (len);
+}
+
+void	sort_one_pass(t_stack *stack_a,t_stack *stack_b)
 {
 	int	i;
 	int	init_count;
