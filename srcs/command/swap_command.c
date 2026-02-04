@@ -8,7 +8,7 @@ void	sa(t_stack *a)
 
 void	sb(t_stack *b)
 {
-	swap(a);
+	swap(b);
 	ft_printf("sa\n");
 }
 

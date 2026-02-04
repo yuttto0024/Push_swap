@@ -35,7 +35,7 @@ static void stack_add_top(t_stack *stack_x, t_node *new_node)
 		stack_x->bottom = new_node;
 		new_node->next = NULL;
 	}
-	stack_x->top = first_y;
+	stack_x->top = new_node;
 	stack_x->size++;
 	new_node->pre = NULL;
 }

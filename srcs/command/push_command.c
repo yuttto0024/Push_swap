@@ -1,4 +1,4 @@
-#include "push_swap.c"
+#include "push_swap.h"
 
 void	pa(t_stack *a, t_stack *b)
 {

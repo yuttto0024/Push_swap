@@ -14,5 +14,5 @@ int main(void)
     stack.size = 0;
     ft_printf("Stack initialized. Size: %d\n", stack.size);
 
-    return (0);
+    return (1);
 }
