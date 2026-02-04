@@ -1,44 +1,45 @@
+#include "push_swap.h"
+
 int	get_asc_length(t_stack *stack)
 {
 	t_node	*current;
-	int		count;
+	int		len;
 
-	if (!sta)
-		return ;
+	if (!stack || !stack->top)
+		return (0);
 	current = stack->top;
-	count = 1;
-	while (current)
+	len = 1;
+	while (current->next)
 	{
 		if (current->value < current->next->value)
 		{
-			count++;
+			len++;
 			current = current->next;
 		}
 		else
 			break ;
 	}
-	return (count);
+	return (len);
 }
 
 int	get_desc_length(t_stack *stack)
 {
 	t_node  *current;
-	int		count;
+	int		len;
 
 	if (!stack || !stack->top)
 		return (0);
-    
 	current = stack->top;
-	count = 1; 
+	len = 1; 
 	while (current->next)
 	{
 		if (current->value > current->next->value)
         {
-            count++;
+            len++;
             current = current->next;
 		}
 		else
 			break ;
 	}
-	return (count);
+	return (len);
 }
