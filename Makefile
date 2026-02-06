@@ -28,11 +28,13 @@ SRCS_NAME   = main.c \
 			  command/reverse_rotate.c \
 			  command/reverse_rotate_command.c \
 			  sort_algorithm/sort_three.c \
-			  sort_algorithm/find_monotonic.c \
-			  sort_algorithm/merge.c \
-			  sort_algorithm/sort_one_pass.c \
 			  sort_algorithm/sort_orchestrator.c \
-			  sort_algorithm/fix_rotation.c \
+			  sort_algorithm/is_sorted.c \
+			  sort_algorithm/search_index.c \
+			  sort_algorithm/cost_utils.c \
+			  sort_algorithm/execute_optimal_rotation_and_push.c \
+			  sort_algorithm/greedy_solver.c \
+			  sort_algorithm/sort_utils.c \
 
 SRCS		= $(addprefix $(SRCDIR)/, $(SRCS_NAME))
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS_NAME:.c=.o))
