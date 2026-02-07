@@ -1,67 +1,98 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_orchestrator.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuonishi <yuonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/07 10:04:26 by yuonishi          #+#    #+#             */
+/*   Updated: 2026/02/07 10:04:28 by yuonishi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-static void	push_by_quartiles_to_b(t_stack *stack_a, t_stack *stack_b, int start, int end)
+static void	push_range(t_stack *stack_a, t_stack *stack_b, int start, int end)
 {
-	int	limit_size;
-	int	sent_count;
-	int	i;
+	int	limit;
 
-	limit_size = stack_a->size;
-	sent_count = 0;
-	i = 0;
-	while (limit_size > i && stack_a->size > 3)
+	limit = stack_a->size;
+	while (limit-- > 0 && stack_a->size > 3)
 	{
 		if (stack_a->top->value >= start && stack_a->top->value <= end)
 			pb(stack_b, stack_a);
 		else
 			ra(stack_a);
-		i++;
 	}
 }
 
-static void align_min_to_top(t_stack *stack_a)
+static void	process_quartiles(t_stack *stack_a, t_stack *stack_b)
 {
-	t_node  *current;
-	int	 min_val;
-	int	 min_index;
-	int	 i;
+	int	*sorted;
+	int	size;
+	int	q1;
+	int	q2;
+	int	q3;
 
-	if (!stack_a->top)
-		return ;
-	min_val = stack_a->top->value;
-	min_index = 0;
+	size = stack_a->size;
+	sorted = build_sorted_reference(stack_a, size);
+	bubble_sort_array_ascending(sorted, size);
+	q1 = sorted[size / 4];
+	q2 = sorted[size / 2];
+	q3 = sorted[(size * 3) / 4];
+	free(sorted);
+	push_range(stack_a, stack_b, q3, 2147483647);
+	push_range(stack_a, stack_b, q2, q3);
+	push_range(stack_a, stack_b, q1, q2);
+	while (stack_a->size > 3)
+		pb(stack_b, stack_a);
+}
+
+static int	get_min_index(t_stack *stack_a, int *min_value)
+{
+	t_node	*current;
+	int		min_ia;
+	int		i;
+
+	*min_value = stack_a->top->value;
+	min_ia = 0;
 	current = stack_a->top;
 	i = 0;
 	while (current)
 	{
-		if (current->value < min_val)
+		if (current->value < *min_value)
 		{
-			min_val = current->value;
-			min_index = i;
+			*min_value = current->value;
+			min_ia = i;
 		}
 		current = current->next;
 		i++;
 	}
-	if (min_index <= stack_a->size / 2)
+	return (min_ia);
+}
+
+static void	align_min_to_top(t_stack *stack_a)
+{
+	int	min_value;
+	int	min_ia;
+
+	if (!stack_a->top)
+		return ;
+	min_ia = get_min_index(stack_a, &min_value);
+	if (min_ia <= stack_a->size / 2)
 	{
-		while (stack_a->top->value != min_val) 
+		while (stack_a->top->value != min_value)
 			ra(stack_a);
 	}
 	else
 	{
-		while (stack_a->top->value != min_val) 
+		while (stack_a->top->value != min_value)
 			rra(stack_a);
 	}
 }
 
-void sort_stacks(t_stack *stack_a, t_stack *stack_b)
+void	sort_stacks(t_stack *stack_a, t_stack *stack_b)
 {
-	int	*sorted_refs;
-	int	total_size;
-	int	qua_1;
-	int	qua_2;
-	int	qua_3;
-
 	if (stack_a->size <= 3)
 	{
 		if (stack_a->size == 2)
@@ -70,18 +101,7 @@ void sort_stacks(t_stack *stack_a, t_stack *stack_b)
 			sort_three(stack_a);
 		return ;
 	}
-	total_size = stack_a->size;
-	sorted_refs = build_sorted_reference(stack_a, total_size);
-	bubble_sort_array_ascending(sorted_refs, total_size);
-	qua_1 = sorted_refs[total_size / 4];
-	qua_2 = sorted_refs[total_size / 2];
-	qua_3 = sorted_refs[(total_size * 3) / 4];
-	free(sorted_refs);
-	push_by_quartiles_to_b(stack_a, stack_b, qua_3, 2147483647);
-	push_by_quartiles_to_b(stack_a, stack_b, qua_2, qua_3);
-	push_by_quartiles_to_b(stack_a, stack_b, qua_1, qua_2);
-	while (stack_a->size > 3)
-		pb(stack_b, stack_a);
+	process_quartiles(stack_a, stack_b);
 	sort_three(stack_a);
 	while (stack_b->size > 0)
 		greedy_move_cheapest_node(stack_a, stack_b);
