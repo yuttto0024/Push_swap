@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_sorted.c                                        :+:      :+:    :+:   */
+/*   add_node_back.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuonishi <yuonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/07 14:16:24 by yuonishi          #+#    #+#             */
-/*   Updated: 2026/02/07 14:16:58 by yuonishi         ###   ########.fr       */
+/*   Created: 2026/02/07 14:13:49 by yuonishi          #+#    #+#             */
+/*   Updated: 2026/02/07 14:13:52 by yuonishi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_sorted(t_stack *stack)
+void	add_node_back(t_stack *stack, t_node *new_node)
 {
-	t_node	*current;
-
-	if (!stack || !stack->top)
-		return (1);
-	current = stack->top;
-	while (current->next)
+	if (!stack || !new_node)
+		return ;
+	if (stack->size == 0)
 	{
-		if (current->value > current->next->value)
-			return (0);
-		current = current->next;
+		stack->top = new_node;
+		stack->bottom = new_node;
+		new_node->pre = NULL;
+		new_node->next = NULL;
 	}
-	return (1);
+	else
+	{
+		stack->bottom->next = new_node;
+		new_node->pre = stack->bottom;
+		new_node->next = NULL;
+		stack->bottom = new_node;
+	}
+	stack->size++;
 }

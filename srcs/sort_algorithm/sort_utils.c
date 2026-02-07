@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuonishi <yuonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/07 14:27:04 by yuonishi          #+#    #+#             */
+/*   Updated: 2026/02/07 14:28:01 by yuonishi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	bubble_sort_array_ascending(int *arr, int size)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 	int	tmp;
 
 	i = 0;
@@ -17,7 +29,7 @@ void	bubble_sort_array_ascending(int *arr, int size)
 				tmp = arr[j];
 				arr[i] = arr[j];
 				arr[j] = tmp;
-			};
+			}
 			j++;
 		}
 		i++;

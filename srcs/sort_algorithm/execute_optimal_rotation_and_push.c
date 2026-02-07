@@ -6,13 +6,14 @@
 /*   By: yuonishi <yuonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 09:41:12 by yuonishi          #+#    #+#             */
-/*   Updated: 2026/02/07 09:41:13 by yuonishi         ###   ########.fr       */
+/*   Updated: 2026/02/07 14:54:34 by yuonishi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void apply_rr_strategy(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
+static void	apply_rr_strategy(t_stack *stack_a, t_stack *stack_b,\
+	int ia, int ib)
 {
 	while (ia > 0 && ib > 0)
 	{
@@ -32,10 +33,11 @@ static void apply_rr_strategy(t_stack *stack_a, t_stack *stack_b, int ia, int ib
 	}
 }
 
-static void apply_rrr_strategy(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
+static void	apply_rrr_strategy(t_stack *stack_a, t_stack *stack_b,\
+	int ia, int ib)
 {
-	int rev_ia;
-	int rev_ib;
+	int	rev_ia;
+	int	rev_ib;
 
 	rev_ia = stack_a->size - ia;
 	if (ia == 0)
@@ -55,10 +57,11 @@ static void apply_rrr_strategy(t_stack *stack_a, t_stack *stack_b, int ia, int i
 		rrb(stack_b);
 }
 
-static void apply_mixed_strategy(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
+static void	apply_mixed_strategy(t_stack *stack_a, t_stack *stack_b,\
+	int ia, int ib)
 {
-	int rev_ia;
-	int rev_ib;
+	int	rev_ia;
+	int	rev_ib;
 
 	rev_ia = stack_a->size - ia;
 	if (ia == 0)
@@ -80,13 +83,14 @@ static void apply_mixed_strategy(t_stack *stack_a, t_stack *stack_b, int ia, int
 			rrb(stack_b);
 }
 
-void execute_optimal_rotation_and_push(t_stack *stack_a, t_stack *stack_b, int ia, int ib)
+void	execute_optimal_rotation_and_push(t_stack *stack_a, t_stack *stack_b,\
+	int ia, int ib)
 {
-	int cost;
-	int cost_rr;
-	int cost_rrr;
-	int rev_ia;
-	int rev_ib;
+	int	cost;
+	int	cost_rr;
+	int	cost_rrr;
+	int	rev_ia;
+	int	rev_ib;
 
 	cost = calculate_process_cost(stack_a->size, stack_b->size, ia, ib);
 	rev_ia = (stack_a->size - ia) % stack_a->size;

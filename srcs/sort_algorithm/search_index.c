@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static int search_closest_larger_index(t_stack *stack_a, int b_value)
+static int	search_closest_larger_index(t_stack *stack_a, int b_value)
 {
 	t_node	*current;
 	int		target_index;
@@ -38,7 +38,7 @@ static int search_closest_larger_index(t_stack *stack_a, int b_value)
 	return (target_index);
 }
 
-static int get_min_index(t_stack *stack_a)
+static int	get_min_index(t_stack *stack_a)
 {
 	t_node	*current;
 	int		min_value;
@@ -62,11 +62,11 @@ static int get_min_index(t_stack *stack_a)
 	return (min_index);
 }
 
-int get_target_index(t_stack *stack_a, int b_value)
+int	get_target_index(t_stack *stack_a, int b_value)
 {
-	int target_index;
+	int	target_index;
 
-	if (!stack_a->top) 
+	if (!stack_a->top)
 		return (0);
 	target_index = search_closest_larger_index(stack_a, b_value);
 	if (target_index != -1)

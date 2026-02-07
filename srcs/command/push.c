@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuonishi <yuonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/07 10:06:17 by yuonishi          #+#    #+#             */
+/*   Updated: 2026/02/07 14:12:41 by yuonishi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	stack_remove_top(t_stack *stack_y)
@@ -20,11 +32,11 @@ static void	stack_remove_top(t_stack *stack_y)
 	stack_y->size--;
 }
 
-static void stack_add_top(t_stack *stack_x, t_node *new_node)
+static void	stack_add_top(t_stack *stack_x, t_node *new_node)
 {
 	t_node	*first_x;
 
-    first_x = stack_x->top;
+	first_x = stack_x->top;
 	if (stack_x->size > 0)
 	{
 		new_node->next = first_x;

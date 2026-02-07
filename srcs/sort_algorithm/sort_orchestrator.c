@@ -6,7 +6,7 @@
 /*   By: yuonishi <yuonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 10:04:26 by yuonishi          #+#    #+#             */
-/*   Updated: 2026/02/07 10:04:28 by yuonishi         ###   ########.fr       */
+/*   Updated: 2026/02/07 14:14:55 by yuonishi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ static void	process_quartiles(t_stack *stack_a, t_stack *stack_b)
 	size = stack_a->size;
 	sorted = build_sorted_reference(stack_a, size);
 	bubble_sort_array_ascending(sorted, size);
-	q1 = sorted[size / 4];
-	q2 = sorted[size / 2];
-	q3 = sorted[(size * 3) / 4];
+	q1 = size / 4;
+	q2 = size / 2;
+	q3 = size * 3 / 4;
 	free(sorted);
-	push_range(stack_a, stack_b, q3, 2147483647);
+	push_range(stack_a, stack_b, q3, 0x7fffffff);
 	push_range(stack_a, stack_b, q2, q3);
 	push_range(stack_a, stack_b, q1, q2);
 	while (stack_a->size > 3)

@@ -6,13 +6,13 @@
 /*   By: yuonishi <yuonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 09:44:14 by yuonishi          #+#    #+#             */
-/*   Updated: 2026/02/07 09:44:15 by yuonishi         ###   ########.fr       */
+/*   Updated: 2026/02/07 14:26:32 by yuonishi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void greedy_move_cheapest_node(t_stack *stack_a, t_stack *stack_b)
+void	greedy_move_cheapest_node(t_stack *stack_a, t_stack *stack_b)
 {
 	t_node	*current;
 	t_move	best;
@@ -26,7 +26,8 @@ void greedy_move_cheapest_node(t_stack *stack_a, t_stack *stack_b)
 	while (current)
 	{
 		target_ia = get_target_index(stack_a, current->value);
-		cost = calculate_process_cost(stack_a->size, stack_b->size, target_ia, ib);
+		cost = calculate_process_cost(stack_a->size, stack_b->size,
+				target_ia, ib);
 		if (best.cost == -1 || cost < best.cost)
 		{
 			best.cost = cost;
@@ -36,5 +37,6 @@ void greedy_move_cheapest_node(t_stack *stack_a, t_stack *stack_b)
 		current = current->next;
 		ib++;
 	}
-	execute_optimal_rotation_and_push(stack_a, stack_b, best.target_ia, best.ib);
+	execute_optimal_rotation_and_push(stack_a, stack_b, best.target_ia,
+		best.ib);
 }

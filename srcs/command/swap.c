@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   swap.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuonishi <yuonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/07 10:06:57 by yuonishi          #+#    #+#             */
+/*   Updated: 2026/02/07 14:11:28 by yuonishi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	swap(t_stack *stack)
@@ -11,13 +23,10 @@ void	swap(t_stack *stack)
 	first = stack->top;
 	second = first->next;
 	third = second->next;
-
 	first->next = third;
 	first->pre = second;
-
 	second->next = first;
 	second->pre = NULL;
-
 	if (stack->size >= 3)
 		third->pre = first;
 	stack->top = second;
