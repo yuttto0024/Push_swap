@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   search_index.c									 :+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: yuonishi <yuonishi@student.42tokyo.jp>	 +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2026/02/07 09:44:35 by yuonishi		  #+#	#+#			 */
+/*   Updated: 2026/02/07 09:47:28 by yuonishi		 ###   ########.fr	   */
+/*																			*/
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int search_closest_larger_index(t_stack *stack_a, int b_value)
@@ -26,20 +38,15 @@ static int search_closest_larger_index(t_stack *stack_a, int b_value)
 	return (target_index);
 }
 
-int get_target_index(t_stack *stack_a, int b_value)
+static int get_min_index(t_stack *stack_a)
 {
 	t_node	*current;
 	int		min_value;
-	int		max_value;
-	int		boundary_index;
+	int		min_index;
 	int		i;
 
-	if (!stack_a->top) 
-		return (0);
-
 	min_value = stack_a->top->value;
-	max_value = stack_a->top->value;
-	boundary_index = 0;
+	min_index = 0;
 	current = stack_a->top;
 	i = 0;
 	while (current)
@@ -47,14 +54,22 @@ int get_target_index(t_stack *stack_a, int b_value)
 		if (current->value < min_value)
 		{
 			min_value = current->value;
-			boundary_index = i;
+			min_index = i;
 		}
-		if (current->value > max_value)
-			max_value = current->value;
 		current = current->next;
 		i++;
 	}
-	if (b_value < min_value || b_value > max_value)
-		return (boundary_index);
-	return (search_closest_larger_index(stack_a, b_value));
+	return (min_index);
+}
+
+int get_target_index(t_stack *stack_a, int b_value)
+{
+	int target_index;
+
+	if (!stack_a->top) 
+		return (0);
+	target_index = search_closest_larger_index(stack_a, b_value);
+	if (target_index != -1)
+		return (target_index);
+	return (get_min_index(stack_a));
 }
