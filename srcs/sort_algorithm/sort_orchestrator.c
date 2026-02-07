@@ -6,7 +6,7 @@
 /*   By: yuonishi <yuonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 10:04:26 by yuonishi          #+#    #+#             */
-/*   Updated: 2026/02/07 14:14:55 by yuonishi         ###   ########.fr       */
+/*   Updated: 2026/02/07 15:12:37 by yuonishi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,12 @@ static void	align_min_to_top(t_stack *stack_a)
 
 void	sort_stacks(t_stack *stack_a, t_stack *stack_b)
 {
-	if (stack_a->size <= 3)
+	if (stack_a->size > 100)
+		process_quartiles(stack_a, stack_b);
+	else
 	{
-		if (stack_a->size == 2)
-			sa(stack_a);
-		else if (stack_a->size == 3)
-			sort_three(stack_a);
-		return ;
+		while (stack_a->size > 3)
+			pb(stack_b, stack_a);
 	}
 	process_quartiles(stack_a, stack_b);
 	sort_three(stack_a);
